@@ -26,27 +26,14 @@ console.log(`url is ${url}`);
         throw new Error(response.statusText);
         }).then(responseJson => {
 //console.log(responseJson)
-            let items = responseJson.items[0].repos_url;
-            $("#js-user-results").append(`<li>${items}</li>`)
-console.log(`items is ${items}`)
+            let userItems = responseJson.items[0].login;
+            $("#js-user-results").append(`<li>${userItems}</li>`);
+            let userRepos = responseJson.items[0].url_repos;
+console.log(`userItems is ${userItems}`)
         }).catch(err => {
             $("#js-error-message").text(`Oopsie poopsie! ${err.message}`)
 console.log(`err is ${err.message}`);
         });
-}
-//function GETS user repos by making a request per the argument passed in
-function getUserRepos(user) {
-    let params = {
-        q: user,
-    }
-    let queryString = formatQueryParameters(params);
-    let url = reposURL + "?" + queryString;
-    fetch(url).then(response => {
-        if(response.ok) {
-            return response.json();
-        }
-        throw new Error(response.statusText);
-        }).then(responseJson => console.log(responseJson))
 }
 //function watches for input submitted on form
 function watchForm() {
@@ -56,7 +43,7 @@ $("form").submit(event => {
     let searchTerm = $("#input-value").val();
 console.log(`searchTerm is ${searchTerm}`)
 //pass input value as argument to function getUserHandle
-    getUserHandle(searchTerm)
+    getUserHandle(searchTerm);
     })
 
 }

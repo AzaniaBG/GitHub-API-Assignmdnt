@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="main.css">
+    <title>Checkpoint 6 Assignment</title>
+</head>
+<body>
+    <header>
+        <h1 role="header">Find a GitHub User.</h1>
+    </header>
+    <form role="form" id="js-form">
+        <fieldset>
+            <legend role="">Search for a GitHub Handle Here.</legend>
+            <label role="" for="input-value"> </label>
+            <input role="" type="text" id="input-value" name="search" value="" placeholder="user handle">
+            <button role="button" type="submit" id="input-search-button">SEARCH</button>
+
+            <section >
+                <h2>GitHub Handle:</h2>
+                <ul id="results" class="hidden">
+                    <li role="" id="js-error-message"></li>
+                    <li role="" id="js-user-results">GitHub Name & Repo:</li>
+                </ul>
+            </section>
+        </fieldset>
+
+
+    </form>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>  
+</body>
+</html>

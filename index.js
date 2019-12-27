@@ -25,11 +25,15 @@ console.log(`url is ${url}`);
         }
         throw new Error(response.statusText);
         }).then(responseJson => {
-//console.log(responseJson)
+console.log(responseJson)
             let userItems = responseJson.items[0].login;
-            $("#js-user-results").append(`<li>${userItems}</li>`);
-            let userRepos = responseJson.items[0].url_repos;
-console.log(`userItems is ${userItems}`)
+            let userRepos = responseJson.items[0].repos_url;
+            $("#js-user-results").append(`<li>${userItems}
+            <a href=${userRepos}>User Repo</a></li>`);
+            
+console.log(`userItems is ${userItems}`);
+console.log(`userRepos is ${userRepos}`);
+
         }).catch(err => {
             $("#js-error-message").text(`Oopsie poopsie! ${err.message}`)
 console.log(`err is ${err.message}`);

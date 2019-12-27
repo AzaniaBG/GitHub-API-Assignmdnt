@@ -2,7 +2,7 @@
 
 //define a variable in which the base url will be stored
 const baseURL = `https://api.github.com/search/users`;
-console.log(`baseURL returns: ${baseURL}`)
+const reposURL = `https://api.github.com/users/:username/repos`;
 //function takes one argument, an object, which is formatted to comply w/ API requirements
 function formatQueryParameters(params) {
     let queryItems = Object.keys(params).map(key => `${key}=${params[key]}`);
@@ -17,7 +17,7 @@ function getUserHandle(search) {
         q: search,
     }
     let queryString = formatQueryParameters(params);
-    let url = baseURL + "?" + queryString ;
+    let url = baseURL + "?" + queryString;
 console.log(`url is ${url}`);
     fetch(url).then(response => {
         if(response.ok) {
@@ -25,14 +25,28 @@ console.log(`url is ${url}`);
         }
         throw new Error(response.statusText);
         }).then(responseJson => {
-console.log(responseJson)
+//console.log(responseJson)
             let items = responseJson.items[0].repos_url;
+            $("#js-user-results").append(`<li>${items}</li>`)
 console.log(`items is ${items}`)
         }).catch(err => {
             $("#js-error-message").text(`Oopsie poopsie! ${err.message}`)
-    console.log(`err is ${err.message}`);
+console.log(`err is ${err.message}`);
         });
-
+}
+//function GETS user repos by making a request per the argument passed in
+function getUserRepos(user) {
+    let params = {
+        q: user,
+    }
+    let queryString = formatQueryParameters(params);
+    let url = reposURL + "?" + queryString;
+    fetch(url).then(response => {
+        if(response.ok) {
+            return response.json();
+        }
+        throw new Error(response.statusText);
+        }).then(responseJson => console.log(responseJson))
 }
 //function watches for input submitted on form
 function watchForm() {

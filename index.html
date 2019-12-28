@@ -18,11 +18,15 @@
             <input role="" type="text" id="input-value" name="search" value="" placeholder="user handle">
             <button role="button" type="submit" id="input-search-button">SEARCH</button>
 
-            <section >
-                <h2>GitHub Handle:</h2>
-                <ul id="results" >
+            <section id="results" class="hidden">
+                <h2>GitHub Handle & Repo:</h2>
+                <ul >
+                    <li role="" id="js-user-results"></li>
+                </ul>
+            </section>
+            <section id="error-message" class="hidden">
+                <ul>
                     <li role="" id="js-error-message"></li>
-                    <li role="" id="js-user-results">GitHub Name & Repo:</li>
                 </ul>
             </section>
         </fieldset>

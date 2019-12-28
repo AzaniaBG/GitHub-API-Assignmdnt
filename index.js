@@ -23,21 +23,24 @@ console.log(`url is ${url}`);
             return response.json();
         }
         throw new Error(response.statusText);
-        }).then(responseJson => {
-console.log(responseJson)
-            let userItems = responseJson.items[0].login;
-            let userRepos = responseJson.items[0].repos_url;
-            $("#js-user-results").append(`<li>${userItems}
-            <a href=${userRepos}>User Repo</a></li>`);
-            
-console.log(`userItems is ${userItems}`);
-console.log(`userRepos is ${userRepos}`);
-
-        }).catch(err => {
-            $("#js-error-message").text(`Oopsie poopsie! ${err.message}`)
+        }).then(responseJson => displayResults(responseJson)).catch(err => {
+            $("#js-error-message").text(`Oopsie poopsie! ${err.message}`);
+            $("#error-message").removeClass("hidden");
 console.log(`err is ${err.message}`);
         });
-}
+};
+//function displays responses to page 
+function displayResults(responseJson) {
+    $("#results").empty;
+    for(let i = 0; i < responseJson.items.length; i++) {
+        let userItems = responseJson.items[i].login;
+        let userRepos = responseJson.items[i].repos_url;
+        $("#js-user-results").append(`<li>${userItems}: <a href="${userRepos}">${userRepos}</a></li><br>`)
+console.log(`userItems is ${userItems}`);
+console.log(`userRepos is ${userRepos}`);     
+    }
+    $("#results").removeClass("hidden");
+};
 //function watches for input submitted on form
 function watchForm() {
 //listen for the `submit` event and capture the user's input

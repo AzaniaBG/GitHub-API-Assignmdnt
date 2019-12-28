@@ -26,18 +26,15 @@ console.log(`url is ${url}`);
         }).then(responseJson => displayResults(responseJson)).catch(err => {
             $("#js-error-message").text(`Oopsie poopsie! ${err.message}`);
             $("#error-message").removeClass("hidden");
-console.log(`err is ${err.message}`);
         });
 };
 //function displays responses to page 
 function displayResults(responseJson) {
-    $("#results").empty;
+    $("#results").empty();
     for(let i = 0; i < responseJson.items.length; i++) {
         let userItems = responseJson.items[i].login;
         let userRepos = responseJson.items[i].repos_url;
-        $("#js-user-results").append(`<li>${userItems}: <a href="${userRepos}">${userRepos}</a></li><br>`)
-console.log(`userItems is ${userItems}`);
-console.log(`userRepos is ${userRepos}`);     
+        $("#results").append(`<li role="" id="js-user-results">${userItems}: <a href="${userRepos}">${userRepos}</a></li><br>`);   
     }
     $("#results").removeClass("hidden");
 };
@@ -47,11 +44,9 @@ function watchForm() {
 $("form").submit(event => {
     event.preventDefault();
     let searchTerm = $("#input-value").val();
-console.log(`searchTerm is ${searchTerm}`)
 //pass input value as argument to function getUserHandle
     getUserHandle(searchTerm);
     })
-
 }
 
 $(watchForm);
